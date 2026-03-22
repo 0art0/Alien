@@ -18,7 +18,7 @@ lemma acce' : x a A A X = x a A A := by simp only [← Tseitin.mul_assoc x, acce
 
 macro "comm" : tactic => `(tactic|
   simp only [ac_comm, ad_comm, bc_comm, bd_comm,
-             ac_comm', ad_comm', bc_comm', bd_comm', mul_assoc])
+             ac_comm', ad_comm', bc_comm', bd_comm', Tseitin.mul_assoc])
 
 macro "create" : tactic => `(tactic| simp only [acce, acce'])
 macro "move_a" : tactic => `(tactic| simp only [ea_swap, ea_swap'])
@@ -157,22 +157,95 @@ lemma problem3 : a a a a A A X = a a a A A X a := by calc
   _ = a a a A A X a := by create
 
 lemma problem4 : A X A A = A A X A := by calc
-  _ = X a A A A := by move
+  _ = X a A A A   := by move
   _ = X a a A A A := by duplicate
   _ = X a A a A A := by comm
-  _ = A A X A := by move
+  _ = A A X A     := by move
 
 lemma problem5 : A X b a A A = A X b a a A A := by calc
-  _ = X a A b a A A := by move
-  _ = X a b a A A A := by comm
+  _ = X a A b a A A   := by move
+  _ = X a b a A A A   := by comm
   _ = X a b a a A A A := by duplicate
   _ = X a A b a a A A := by comm
-  _ = A X b a a A A := by move
+  _ = A X b a a A A   := by move
 
 lemma problem6 : a a a a A A X = a a A A X a a := by calc
   _ = a a a a A A   := by create
   _ = a a A A a a   := by comm
   _ = a a A A X a a := by create
+
+lemma problem7 : a A A A B A B X = a A A A B X a X A B := by calc
+  _ = a A A A X b B a A b B := by move
+  _ = A a A A X b a B A b B := by comm
+  _ = A a A A b a B A b B   := by create
+  _ = a b A a A A b B A B   := by comm
+  _ = a b A a A A X b B A B := by create
+  _ = a b A a A A B X A B   := by move
+  _ = A a A A b B a X A B   := by comm
+  _ = A a A A X b B a X A B := by create
+  _ = A a A A B X a X A B   := by move
+  _ = a A A A B X a X A B   := by comm
+
+lemma problem8 : A A X X a b X = A A X a b X X := by calc
+  _ = X a A a A X a b X     := by move
+  _ = X a a A A X a b X     := by comm
+  _ = X a a A A a b X       := by create
+  _ = X a a a b A A X       := by comm
+  _ = X a a a b X a A a A   := by move
+  _ = X a a a b X a a A A   := by comm
+  _ = X a a a b X a a A A X := by create
+  _ = X a a a b X a A a A X := by comm
+  _ = X a a a b A A X X     := by move
+  _ = X a A a A a b X X     := by comm
+  _ = A A X a b X X         := by move
+
+lemma problem9 : A A X A = A X A A := by calc
+  _ = X a A a A A := by move
+  _ = X a a A A A := by comm
+  _ = X a A A A   := by duplicate
+  _ = A X A A     := by move
+
+lemma problem10 : a A A B A A A = a b a A A B A A A := by calc
+  _ = A A B a A A A         := by comm
+  _ = A A B a A A X A       := by create
+  _ = a A A B A A X A       := by comm
+  _ = a A A X b B a A a A A := by move
+  _ = a A A b B a A a A A   := by create
+  _ = a b A A B a a A A A   := by comm
+  _ = a b A A B a A A A     := by duplicate
+  _ = a b a A A B A A A     := by comm
+
+lemma problem11 : a A B A A A = a A B A X A A := by calc
+  _ = A B a A A A       := by comm
+  _ = A B a A A X A     := by create
+  _ = a A B A A X A     := by comm
+  _ = a A B X a A a A A := by move
+  _ = a A B X a a A A A := by comm
+  _ = a A B X a A A A   := by duplicate
+  _ = a A B A X A A     := by move
+
+lemma problem12 : a A A A B A A = a b a A A A B A A := by calc
+  _ = A A A B a A A           := by comm
+  _ = A A A B a A A X         := by create
+  _ = a A A A B A A X         := by comm
+  _ = a A A A X b B a A a A   := by move
+  _ = A a A A X b B a A a A   := by comm
+  _ = A a A A b B a A a A     := by create
+  _ = a b a a A A A B A A     := by comm
+  _ = a b a A A A B A A       := by duplicate
+
+lemma problem13 : a A A A B A X A B = a A A A B A A B := by sorry
+
+lemma problem14 : a A A A B A B X = a b a A A A B X A B := by sorry
+
+lemma problem15 :
+    b a b a B A A B A X b a b a B A A B A A = b a b a B A A B A X b a b a b a B A A B A A := by calc
+  _ = b a b a B A A X b B a A b a b a B A A B A A := by move
+  _ = b a b B a A A X b B a A b a b a B A A B A A := by comm
+  _ = b a b B a A A b B a A b a b a B A A B A A := by create
+  _ = _ := by sorry
+
+  -- _ = b a b a
 
 -- lemma example1 : A A X X = A A X := calc
 --   _ = X a A a A X := by move
