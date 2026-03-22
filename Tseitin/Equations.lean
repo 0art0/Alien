@@ -234,25 +234,46 @@ lemma problem12 : a A A A B A A = a b a A A A B A A := by calc
   _ = a b a a A A A B A A     := by comm
   _ = a b a A A A B A A       := by duplicate
 
-lemma problem13 : a A A A B A X A B = a A A A B A A B := by sorry
+lemma problem13 : a A A A B A X A B = a A A A B A A B := by calc
+  _ = a A A A X b B a A A B   := by move
+  _ = A a A A X b B a A A B   := by comm
+  _ = A a A A b B a A A B     := by create
+  _ = a b a A A A B A A B     := by comm
+  _ = a b a a A A A B A A B   := by duplicate
+  _ = A a A A b B a A a A B   := by comm
+  _ = A a A A X b B a A a A B := by create
+  _ = A a A A B A A X B       := by move
+  _ = A A A B a A A X B       := by comm
+  _ = A A A B a A A B         := by create
+  _ = a A A A B A A B         := by comm
 
-lemma problem14 : a A A A B A B X = a b a A A A B X A B := by sorry
+lemma problem14 : a A A A B A B X = a b a A A A B X A B := by calc
+  _ = a A A A X b B a A b B := by move
+  _ = A a A A X b B a A b B := by comm
+  _ = A a A A b B a A b B   := by create
+  _ = a b A a A A b B A B   := by comm
+  _ = a b A a A A X b B A B := by create
+  _ = a b a A A A X b B A B := by comm
+  _ = a b a A A A B X A B   := by move
 
 lemma problem15 :
     b a b a B A A B A X b a b a B A A B A A = b a b a B A A B A X b a b a b a B A A B A A := by calc
   _ = b a b a B A A X b B a A b a b a B A A B A A := by move
-  _ = b a b B a A A X b B a A b a b a B A A B A A := by comm
-  _ = b a b B a A A b B a A b a b a B A A B A A := by create
-  _ = _ := by sorry
-
-  -- _ = b a b a
-
--- lemma example1 : A A X X = A A X := calc
---   _ = X a A a A X := by move
---   _ = X a a A A X := by comm
---   _ = X a a A A   := by create
---   _ = X a A a A   := by comm
---   _ = A A X       := by move
+  _ = b a b B a A A X b B a A b a b B a A A B A A := by comm
+  _ = b a b B a A A b B a A b a b B a A A B A A   := by create
+  _ = b a b B a A A b B a A b a b B a A A X B A A := by create
+  _ = b a b a b a b a b B a A A B A B A A X B A A := by comm
+  _ = b a b a b a b a b B a A A X b B a A b B a A a A B A A := by move
+  _ = b a b a b a b a b B a A A b B a A b B a A a A B A A := by create
+  _ = b a b a b a b a b a b B A A B A B a A A b B a A a A := by comm
+  _ = b a b a b a b a b a b B A A B A B a A A X b B a A a A := by create
+  _ = b a b a b a b a b a b B A A B A B a A A B A A X := by move
+  _ = b a b a b a b a b a b B A A B A B A A B a A A X := by comm
+  _ = b a b a b a b a b a b B A A B A B A A B a A A := by create
+  _ = b a b B a A A b B a A b a b a b a B A A B A A := by comm
+  _ = b a b B a A A X b B a A b a b a b a B A A B A A := by create
+  _ = b a b a B A A X b B a A b a b a b a B A A B A A := by comm
+  _ = b a b a B A A B A X b a b a b a B A A B A A := by move
 
 end intermediate
 
