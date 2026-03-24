@@ -57,6 +57,12 @@ meta def unexpandTseitinMul : Lean.PrettyPrinter.Unexpander
   | `($_mul $x $y) => `($x $y)
   | _ => throw ()
 
+open Lean PrettyPrinter Parenthesizer in
+@[category_parenthesizer term]
+meta def term.parenthesizer : CategoryParenthesizer | prec => do
+  maybeParenthesize `term true id prec <|
+    parenthesizeCategoryCore `term prec
+
 variable (x y z : Tseitin)
 
 @[simp] lemma mul_assoc (x y z : Tseitin) : x (y z) = x y z := mul_assoc' _ _ _
